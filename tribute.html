@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Oliver Tree Tribute Canvas</title>
@@ -242,6 +246,27 @@
                 border-top: 1px solid #ddd;
                 box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
             }
+
+            #floating-music-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            padding: 10px 15px;
+            background: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            transition: background 0.2s;
+        }
+
+        #floating-music-btn:hover {
+            background: #34495e;
+        }
         }
     </style>
 </head>
@@ -258,7 +283,7 @@
         </div>
         <div id="flowers-ground"></div>
     </div>
-
+    <button id="floating-music-btn" onclick="toggleMusic(event)">?? Turn On Music</button>
     <div id="ui-panel">
         <div class="ui-header">
             <h3>Tribute Wall</h3>
@@ -268,12 +293,29 @@
         <div id="messages-stack"></div>
 
         <div class="controls">
+            
             <input type="text" id="tribute-input" placeholder="Type your tribute here..." autocomplete="off">
             <button onclick="postTribute()">Place Red Tulip</button>
         </div>
     </div>
 
     <script>
+        $(document).ready(function () {
+            const audio = new Audio("bg.mp3");
+            audio.loop = true;
+
+            Swal.fire({
+                title: 'Welcome',
+                text: 'Welcome to the Tribute Page. Please be respectful.',
+                icon: '',
+                confirmButtonText: 'Enter'
+            }).then(() => {
+                audio.play().catch(err => {
+                    console.log("Browser blocked autoplay:", err);
+                });
+            });
+
+        });
         const _0x6d774d=_0x385a;(function(_0x227370,_0x187027){const _0x1d0fa3=_0x385a,_0x34931c=_0x227370();while(!![]){try{const _0x590b49=parseInt(_0x1d0fa3(0xbf))/0x1+-parseInt(_0x1d0fa3(0xa5))/0x2*(parseInt(_0x1d0fa3(0xa9))/0x3)+-parseInt(_0x1d0fa3(0xa2))/0x4+-parseInt(_0x1d0fa3(0xc6))/0x5*(parseInt(_0x1d0fa3(0xcc))/0x6)+-parseInt(_0x1d0fa3(0xbd))/0x7+-parseInt(_0x1d0fa3(0xab))/0x8*(parseInt(_0x1d0fa3(0xd5))/0x9)+-parseInt(_0x1d0fa3(0xbe))/0xa*(-parseInt(_0x1d0fa3(0x99))/0xb);if(_0x590b49===_0x187027)break;else _0x34931c['push'](_0x34931c['shift']());}catch(_0x5021cc){_0x34931c['push'](_0x34931c['shift']());}}}(_0x5801,0xb96f9),document[_0x6d774d(0xa6)]('mousemove',_0x472544=>{const _0x381a9e=_0x6d774d;if(window[_0x381a9e(0xc1)]<=0x300)return;const _0x3520fc=document[_0x381a9e(0xaa)](_0x381a9e(0xaf)),_0x259bf7=document[_0x381a9e(0xaa)](_0x381a9e(0x9e)),_0x1df157=(window[_0x381a9e(0xc1)]/0x2-_0x472544[_0x381a9e(0xa8)])/0x3c,_0x2d43f0=(window[_0x381a9e(0xd4)]/0x2-_0x472544[_0x381a9e(0xc5)])/0x3c;_0x3520fc[_0x381a9e(0xb4)][_0x381a9e(0x98)]=_0x381a9e(0xb6)+_0x1df157+_0x381a9e(0xb0)+_0x2d43f0+_0x381a9e(0xae),_0x259bf7[_0x381a9e(0xb4)]['transform']=_0x381a9e(0xb1)+_0x1df157*1.2+_0x381a9e(0xc9)+-_0x2d43f0*1.2+_0x381a9e(0xb5);}),document['addEventListener'](_0x6d774d(0xbc),()=>{loadTributes();}));async function loadTributes(){const _0x517254=_0x6d774d;try{const _0x2453e7=await fetch(_0x517254(0xd0)),_0x22e082=await _0x2453e7[_0x517254(0x9c)]();_0x22e082[_0x517254(0xc0)](_0x1a1273=>{const _0x1d6b49=_0x517254;renderTribute(_0x1a1273[_0x1d6b49(0xa4)],_0x1a1273[_0x1d6b49(0xc2)],_0x1a1273['left'],_0x1a1273['bottom'],_0x1a1273[_0x1d6b49(0x9a)],![]);});}catch(_0x534171){console[_0x517254(0xcd)](_0x517254(0xbb),_0x534171);}}function renderTribute(_0x5d3bba,_0xfa6a39,_0xbb309d,_0x551607,_0x5e69cf,_0x544436=!![]){const _0x2b548e=_0x6d774d,_0x488e44=document['getElementById']('messages-stack'),_0x1c4d54=document[_0x2b548e(0xaa)](_0x2b548e(0xce)),_0x681360=document[_0x2b548e(0xb7)](_0x2b548e(0xd2));_0x681360[_0x2b548e(0xa1)]=_0x2b548e(0xd8);const _0x4ea8a2=document[_0x2b548e(0x9b)]('\x22'+_0x5d3bba+'\x22\x20');_0x681360['appendChild'](_0x4ea8a2);const _0x51b259=document[_0x2b548e(0xb7)]('span');_0x51b259[_0x2b548e(0xc8)]=_0x2b548e(0xb3)+_0xfa6a39,_0x681360[_0x2b548e(0xad)](_0x51b259),_0x488e44[_0x2b548e(0x9d)](_0x681360);const _0x3e9294=document['createElement']('div');_0x3e9294[_0x2b548e(0xa1)]=_0x2b548e(0xa7),_0x3e9294[_0x2b548e(0xb4)][_0x2b548e(0xba)]=_0xbb309d+'%',_0x3e9294['style'][_0x2b548e(0xb8)]=_0x551607+'px',_0x3e9294[_0x2b548e(0xb4)][_0x2b548e(0xc7)](_0x2b548e(0xa0),_0x5e69cf+'deg'),!_0x544436&&(_0x3e9294[_0x2b548e(0xb4)][_0x2b548e(0xcf)]='0s'),_0x1c4d54[_0x2b548e(0xad)](_0x3e9294);}async function postTribute(){const _0x415b71=_0x6d774d,_0x4cae0a=document[_0x415b71(0xaa)](_0x415b71(0xa3)),_0x475c3e=_0x4cae0a['value'][_0x415b71(0xca)]();if(_0x475c3e==='')return;const _0x4b8fe9=new Date()[_0x415b71(0xd3)]([],{'hour':'2-digit','minute':_0x415b71(0xd7)}),_0x50def7=Math[_0x415b71(0xac)](Math[_0x415b71(0xc4)]()*0x55),_0x45b6cc=Math[_0x415b71(0xac)](Math['random']()*0x1e),_0x409af8=Math[_0x415b71(0xac)](Math[_0x415b71(0xc4)]()*0x168),_0x8d7e6b={'text':_0x475c3e,'time':_0x4b8fe9,'left':_0x50def7,'bottom':_0x45b6cc,'rot':_0x409af8};try{const _0x17bf53=await fetch('save-tribute.php',{'method':_0x415b71(0xb2),'headers':{'Content-Type':'application/json'},'body':JSON[_0x415b71(0x9f)](_0x8d7e6b)}),_0x277dfc=await _0x17bf53['json']();if(_0x277dfc['status']===_0x415b71(0xcd)){alert(_0x277dfc['message']);return;}renderTribute(_0x475c3e,_0x4b8fe9,_0x50def7,_0x45b6cc,_0x409af8,!![]),_0x4cae0a['value']='';}catch(_0x29ed44){alert(_0x415b71(0xd6));}window['innerWidth']<=0x300&&_0x4cae0a[_0x415b71(0xb9)]();}function _0x5801(){const _0x464a09=['setProperty','textContent','px),\x20','trim','Enter','6vbzZop','error','flowers-ground','animationDuration','get-tributes.php','keypress','div','toLocaleTimeString','innerHeight','2393640OULRhN','Network\x20error:\x20Could\x20not\x20connect\x20to\x20the\x20server.','2-digit','message-card','transform','2678731zIuTUv','rot','createTextNode','json','prepend','tombstone-wrapper','stringify','--rot','className','590096JoDcvZ','tribute-input','text','973792dMPAkZ','addEventListener','real-tulip','pageX','6mDUODp','getElementById','24IMBkvY','floor','appendChild','px)\x20scale(1.05)','scene','px,\x20','translate(calc(-50%\x20-\x20','POST','Place\x20a\x20tulip\x20at\x20','style','px)','translate(','createElement','bottom','blur','left','No\x20previous\x20tributes\x20found.','DOMContentLoaded','7446775RbvTTP','170eayMpW','20232uzoFZb','forEach','innerWidth','time','key','random','pageY','2087615ErEmDA'];_0x5801=function(){return _0x464a09;};return _0x5801();}function _0x385a(_0xb5cb23,_0x372404){_0xb5cb23=_0xb5cb23-0x98;const _0x580149=_0x5801();let _0x385a33=_0x580149[_0xb5cb23];return _0x385a33;}document[_0x6d774d(0xaa)](_0x6d774d(0xa3))[_0x6d774d(0xa6)](_0x6d774d(0xd1),function(_0x10ab04){const _0x2ac14b=_0x6d774d;_0x10ab04[_0x2ac14b(0xc3)]===_0x2ac14b(0xcb)&&postTribute();});
     </script>
 </body>

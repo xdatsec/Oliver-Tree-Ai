@@ -268,6 +268,43 @@
             background: #34495e;
         }
         }
+
+        #toggle-btn {
+            display: none; /* Only show on mobile */
+            background: #e74c3c;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg); /* Points down initially */
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 11;
+            transition: transform 0.3s ease;
+        }
+
+        .ui-panel-hidden #toggle-btn {
+            transform: translateX(-50%) rotate(-90deg);
+        }
+
+        @media (max-width: 768px) {
+            #toggle-btn { display: flex; }
+            
+            #ui-panel {
+                transition: transform 0.3s ease-in-out;
+            }
+
+            .ui-panel-hidden {
+                transform: translateY(calc(100% - 10px));
+            }
+        }
     </style>
 </head>
 <body>
@@ -283,9 +320,10 @@
         </div>
         <div id="flowers-ground"></div>
     </div>
-    <button id="floating-music-btn" onclick="toggleMusic(event)">?? Turn On Music</button>
+   
     <div id="ui-panel">
         <div class="ui-header">
+            <div id="toggle-btn" onclick="togglePanel()">></div>
             <h3>Tribute Wall</h3>
             <p>Leave a message & a real red tulip</p>
         </div>
@@ -300,6 +338,17 @@
     </div>
 
     <script>
+        function togglePanel() {
+            const panel = document.getElementById('ui-panel');
+            panel.classList.toggle('ui-panel-hidden');
+           
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('ui-panel').classList.add('ui-panel-hidden');
+            }
+        });
         $(document).ready(function () {
             const audio = new Audio("bg.mp3");
             audio.loop = true;

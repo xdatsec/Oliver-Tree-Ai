@@ -1,0 +1,390 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oliver Tree - Tribute Interactive</title>
+    <style>
+
+
+.subtitle-box{
+
+    position:fixed;
+
+    bottom:30px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:85%;
+
+    max-width:420px;
+
+    min-height:60px;
+
+    background:rgba(8, 11, 29, 0.938);
+
+    color:white;
+
+    border-radius:1px;
+
+    padding:15px 20px;
+
+    box-sizing:border-box;
+
+    font-size:20px;
+
+    font-weight:600;
+
+    text-align:center;
+
+    line-height:1.4;
+
+    z-index:9999;
+
+
+    transition:.25s;
+
+    opacity:0;
+}
+
+.subtitle-box.show{
+
+    opacity:1;
+}
+
+.subtitle-author{
+
+    font-size:12px;
+
+    color:#ff7675;
+
+    margin-bottom:6px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+}
+
+.subtitle-text{
+
+    word-break:break-word;
+}
+        body { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            background: #fffb00; 
+            margin: 0; 
+            padding-top: 40px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            touch-action: none; 
+        }
+        
+        .oliver-container {
+            position: relative;
+            width: 220px;
+            height: 260px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Oversized Windbreaker */
+
+        /* Face Container */
+        .face {
+            position: absolute;
+            width: 150px;
+            height: 140px;
+            background: #ffeaa7;
+            border-radius: 45%;
+            top: 30px;
+            border: 4px solid #2d3436;
+            transition: all 0.3s ease;
+        }
+
+        /* Hair */
+        .hair {
+            position: absolute;
+            width: 164px;
+            height: 85px;
+            background: #000000;
+            border-radius: 100px 100px 20px 20px;
+            top: 20px;
+            z-index: 2;
+            border: 4px solid #2d3436;
+        }
+
+        /* Sunglasses Container */
+        .glasses {
+            position: absolute;
+            top: 55px;
+            left: 15px;
+            width: 120px;
+            height: 50px;
+            z-index: 3;
+            display: flex;
+            gap: 12px;
+            transition: transform 0.3s ease;
+        }
+.lens {
+    width: 58px;
+    height: 42px;
+    background: #2d3436;
+    border: 5px solid red;
+
+    border-radius: 16px;
+
+    position: relative;
+    overflow: hidden;
+
+    transition: all .3s ease;
+}
+        
+
+        /* Nose */
+        .nose {
+            position: absolute;
+            top: 105px;
+            left: 68px;
+            width: 6px;
+            height: 4px;
+            background: #fab1a0;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Mouth */
+        .mouth {
+            position: absolute;
+            top: 118px;
+            left: 65px;
+            width: 12px;
+            height: 6px;
+            background: #2d3436;
+            border-radius: 0 0 10px 10px;
+            transition: all 0.1s ease;
+            z-index: 1;
+        }
+        /* Jacket */
+
+.jacket{
+    position:absolute;
+
+    top:140px;
+
+    left:-28px;
+
+    width:200px;
+
+    height:150px;
+
+    border-radius:35px;
+
+    background:
+    linear-gradient(
+    to bottom,
+
+    #9f7cf4 0%,
+
+    #9f7cf4 45%,
+
+    #ff6ad5 45%,
+
+    #ff6ad5 100%
+    );
+
+    border:4px solid #2d3436;
+
+    z-index:-1;
+}
+
+/* Center zipper */
+
+.jacket::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:26px;
+
+    height:100%;
+
+    left:87px;
+
+    background:#f08ae7;
+}
+
+/* Yellow inner collar */
+
+.jacket::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:65px;
+
+    width:70px;
+
+    height:28px;
+
+    background:#ffe66d;
+
+    border-radius:0 0 20px 20px;
+}
+        /* --- EXPRESSION MODIFIERS --- */
+        
+        /* Angry */
+        .face.angry .lens {
+            border-radius: 10px 10px 50% 50%; /* Flat top to simulate furrowed brows */
+            background: #1e272e;
+        }
+        .face.angry .mouth {
+            border-radius: 10px 10px 0 0; /* Frown */
+            top: 120px;
+        }
+
+        /* Happy */
+        .face.happy .mouth {
+            width: 20px;
+            height: 12px;
+            left: 61px;
+            background: #d63031;
+            border-radius: 0 0 20px 20px; /* Big smile */
+        }
+        .face.happy {
+            background: #fff0b3; /* Brighter skin */
+        }
+
+        /* Cool */
+        .face.cool .glasses {
+            transform: translateY(10px); /* Glasses slide down */
+        }
+        .face.cool .mouth {
+            width: 15px;
+            left: 60px;
+            transform: rotate(-15deg); /* Smirk */
+        }
+
+        /* Talking Animations */
+        .mouth.talking {
+            height: 15px;
+            width: 15px;
+            left: 63px;
+            border-radius: 50%;
+            background: #d63031;
+            transform: none; /* overrides cool smirk when talking */
+        }
+        .mouth.screaming {
+            height: 25px;
+            width: 20px;
+            left: 61px;
+            top: 115px;
+            border-radius: 40% 40% 60% 60%;
+            background: #2d3436;
+            transform: none;
+        }
+
+        /* UI Controls */
+        .controls {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: white;
+            padding: 20px;
+            border-radius: 1px;
+            width: 90%;
+            max-width: 320px;
+        }
+        .control-row {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+        }
+        select, input {
+            flex: 1;
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px solid #dfe6e9;
+            font-size: 14px;
+            outline: none;
+        }
+        button {
+            padding: 10px 15px;
+            background: #ff7675;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:active { transform: scale(0.95); }
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+        .action-btns button {
+            flex: 1;
+            background: #0984e3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Oliver Tree AI</h1>
+       <p style="font-size:20px;color:#020202;margin:0;">
+        Oliver Tree died in a helicopter crash on June 14, 2026, in Rio de Janeiro, Brazil.<br>
+        You will be remembered forever 
+    </p>
+
+    <div class="oliver-container">
+      
+        <div class="hair"></div>
+        <div class="face" id="characterFace">
+            <div class="glasses">
+                <div class="lens"><</div>
+                <div class="lens"></div>
+            </div>
+            <div class="nose"></div>
+            <div class="mouth" id="mouth"></div>
+            <div class="jacket"></div>
+        </div>
+         
+    </div>
+   
+    <div id="subtitleBox" class="subtitle-box">
+
+    <div class="subtitle-author">
+        Chat
+    </div>
+    
+    <div
+    id="subtitleText"
+    class="subtitle-text">
+    </div>
+
+</div>
+    <div class="controls">
+        <div class="control-row">
+            <input type="text" id="talkInput" placeholder="Make him say something...">
+            <button id="send">Talk</button>
+        </div>
+        <div class="action-btns">
+            <button onclick="sing()">Sing</button>
+        </div>
+        <div class="action-btns">
+            <a style="color:black; text-decoration: none;" href="tribute.html">Give Tribute Message</a>
+        </div>
+    </div>
+</body>
+<script src='oliver.js'></script>
+</html>

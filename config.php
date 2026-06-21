@@ -1,0 +1,3 @@
+<?php
+
+$OPENROUTER_API_KEY='API KEY HERE';
